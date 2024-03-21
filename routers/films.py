@@ -9,55 +9,56 @@ router = APIRouter()
 
 
 @router.get("/films/", response_model=List[FilmModel])
-async def read_films():
+async def get_all_films():
     try:
-        films = await films_service.read_films()
-        if films:
-            return films
-        else:
+        films = await films_service.get_all_films()
+        if not films:
             raise HTTPException(status_code=404, detail="No films found")
+        return films
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": str(e)})
 
 
-@router.get("/films/{id}", response_model=FilmModel)
-async def get_film(id: str):
+@router.get("/films/{film_id}", response_model=FilmModel)
+async def get_single_film(film_id: str):
     try:
-        film = await films_service.get_film(id)
-        if film:
-            return film
-        else:
+        film = await films_service.get_film(film_id)
+        if not film:
             raise HTTPException(status_code=404, detail="Film not found")
+        return film
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": str(e)})
 
 
 @router.post("/films/")
-async def create_film(film: CreateFilmModel):
+async def add_film(film: CreateFilmModel):
     try:
         new_film = await films_service.create_film(film)
-        if new_film:
-            return JSONResponse(status_code=200, content={"success": True, "message": "Film created successfully"})
+        if not new_film:
+            raise HTTPException(status_code=400, detail="Film could not be created")
+        return JSONResponse(status_code=200, content={"success": True, "message": "Film created successfully"})
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": str(e)})
 
 
-@router.put("/films/{id}")
-async def update_film(id: str, film: UpdateFilmModel):
+@router.put("/films/{film_id}")
+async def update_single_film(film_id: str, film: UpdateFilmModel):
     try:
-        updated_film = await films_service.update_film(id, film)
-        if updated_film:
-            return JSONResponse(status_code=200, content={"success": True, "message": "Film updated successfully"})
+        updated_film = await films_service.update_film(film_id, film)
+        if not updated_film:
+            raise HTTPException(status_code=400, detail="Film could not be updated")
+        return JSONResponse(status_code=200, content={"success": True, "message": "Film updated successfully"})
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": str(e)})
 
 
-@router.delete("/films/{id}")
-async def delete_film(id: str):
+@router.delete("/films/{film_id}")
+async def remove_film(film_id: str):
     try:
-        deleted_film = await films_service.delete_film(id)
-        if deleted_film:
-            return JSONResponse(status_code=200, content={"success": True, "message": "Film deleted successfully"})
+        deleted_film = await films_service.delete_film(film_id)
+        if not deleted_film:
+            raise HTTPException(status_code=400, detail="Film could not be deleted")
+        return JSONResponse(status_code=200, content={"success": True, "message": "Film deleted successfully"})
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": str(e)})
 
@@ -66,28 +67,26 @@ async def delete_film(id: str):
 async def get_films_by_genre(genre: Optional[str] = Query(None)):
     try:
         films = await films_service.get_films_by_genre(genre)
-        if films:
-            return films
-        else:
+        if not films:
             raise HTTPException(status_code=404, detail="No films found")
+        return films
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": str(e)})
 
 
 @router.get("/films/sort/", response_model=List[FilmModel])
-async def read_films_sorted(field: Optional[str] = Query(None, alias="field"),
-                            order: Optional[str] = Query(None, alias="order")):
+async def get_sorted_films(field: Optional[str] = Query(None), order: Optional[str] = Query(None)):
     try:
-        films = await films_service.read_films_sorted(field, order)
+        films = await films_service.get_sorted_films(field, order)
         return films
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": str(e)})
 
 
 @router.get("/films/limit/", response_model=FilmsLimitResponse)
-async def read_films_limit(limit: Optional[int] = Query(None, alias="limit")):
+async def get_limited_films(limit: Optional[int] = Query(None)):
     try:
-        films = await films_service.read_films_limit(limit)
+        films = await films_service.get_limited_films(limit)
         return films
     except Exception as e:
         return JSONResponse(status_code=500, content={"success": False, "message": str(e)})
