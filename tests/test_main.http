@@ -20,7 +20,7 @@ Accept: application/json
 {
   "title": "Test Title",
   "director": "Test Director",
-  "year": 2022,
+  "year": 2024,
   "genre": "Test Genre",
   "rating": 5.0,
   "country": "Test Country"
@@ -36,7 +36,7 @@ Accept: application/json
 {
   "title": "Updated Title",
   "director": "Updated Director",
-  "year": 2022,
+  "year": 2024,
   "genre": "Updated Genre",
   "rating": 4.5,
   "country": "Updated Country"

@@ -1,50 +1,47 @@
 # Film API
 
-This is a simple API that allows you to manage films. You can perform CRUD operations on films and also filter, sort and
-limit the films. The API uses MongoDB as its database.
+Esta es una API sencilla que te permite gestionar películas. Puedes realizar operaciones CRUD en películas, así como
+filtrarlas, ordenarlas y limitarlas. La API utiliza MongoDB como base de datos.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing
-purposes.
+Sigue estas instrucciones para obtener una copia del proyecto y ejecutarlo en tu máquina local.
 
 ### Prerequisites
 
-- Python 3.8 or higher
+- Python 3.8 o superior
 - MongoDB
 
 ### Installing
 
-1. Clone the repository:
-    ```
-    git clone https://github.com/JostinCabascango/film-api-mongodb.git
-    ```
-2. Navigate to the project directory:
+1. Clona el repositorio:
+   ```
+   git clone https://github.com/JostinCabascango/film-api-mongodb.git
+   ```
+2. Navega al directorio del proyecto:
     ```
     cd film-api-mongodb
     ```
-3. Install the required packages:
-    ```
-    pip install -r requirements.txt
-    ```
+3. Instala los paquetes requeridos:
+   ```
+   pip install -r requirements.txt
+   ```
 
 ## Running the Application
 
-To run the application, use the following command in the project directory:
+Para ejecutar la aplicación, usa el siguiente comando en el directorio del proyecto:
 
 ```
 uvicorn main:app --reload
 ```
 
-The application will be available at `http://localhost:8000`.
+La aplicación estará disponible en `http://localhost:8000`.
 
 ## Testing the API
 
-You can test the API using the provided `tests/test_main.http` file in a tool
-like [REST Client for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
-or [Postman](https://www.postman.com/).
-
-The API has the following endpoints:
+Puedes probar la API utilizando el archivo `tests/test_main.http` proporcionado en una herramienta
+como [Postman](https://www.postman.com/).
+La API tiene los siguientes endpoints:
 
 - `GET /api/films/`: Get all films.
 - `GET /api/films/{film_id}`: Get a single film by its ID.
@@ -55,3 +52,7 @@ The API has the following endpoints:
 - `GET /api/films/sort/`: Get sorted films.
 - `GET /api/films/limit/`: Get limited films.
 
+## Demo
+
+Puedes ver una demostración del proyecto en el siguiente
+enlace: [Google Drive Video](https://drive.google.com/file/d/1BlJlZuSUJLp11pGkLgfy9za6hQAtJOvv/view?usp=sharing)
