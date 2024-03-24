@@ -1,11 +1,67 @@
 # Test your FastAPI endpoints
 
-GET http://127.0.0.1:8000/
+# Test GET all films
+GET http://127.0.0.1:8000/api/films/
 Accept: application/json
 
 ###
 
-GET http://127.0.0.1:8000/hello/User
+# Test GET single film
+GET http://127.0.0.1:8000/api/films/65fc86ebb6ba3a292b2fb78d
 Accept: application/json
 
 ###
+
+# Test POST create a new film
+POST http://127.0.0.1:8000/api/films/
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Test Title",
+  "director": "Test Director",
+  "year": 2022,
+  "genre": "Test Genre",
+  "rating": 5.0,
+  "country": "Test Country"
+}
+
+###
+
+# Test PUT update a film
+PUT http://127.0.0.1:8000/api/films/66006749fa2889b11a32f18a
+Content-Type: application/json
+Accept: application/json
+
+{
+  "title": "Updated Title",
+  "director": "Updated Director",
+  "year": 2022,
+  "genre": "Updated Genre",
+  "rating": 4.5,
+  "country": "Updated Country"
+}
+
+###
+
+# Test DELETE a film
+DELETE http://127.0.0.1:8000/api/films/66006749fa2889b11a32f18a
+Accept: application/json
+
+###
+
+# Test GET films by genre
+GET http://127.0.0.1:8000/api/films/filter/?genre=action
+Accept: application/json
+
+###
+
+# Test GET sorted films
+GET http://127.0.0.1:8000/api/films/sort/?field=title&order=asc
+Accept: application/json
+
+###
+
+# Test GET limited films
+GET http://127.0.0.1:8000/api/films/limit/?limit=5
+Accept: application/json

@@ -10,6 +10,7 @@ router = APIRouter()
 
 @router.get("/films/", response_model=List[FilmModel])
 async def get_all_films():
+    """Get all films"""
     try:
         films = await films_service.get_all_films()
         if not films:
@@ -21,6 +22,7 @@ async def get_all_films():
 
 @router.get("/films/{film_id}", response_model=FilmModel)
 async def get_single_film(film_id: str):
+    """Get a single film by its ID"""
     try:
         film = await films_service.get_film(film_id)
         if not film:
@@ -32,6 +34,7 @@ async def get_single_film(film_id: str):
 
 @router.post("/films/")
 async def add_film(film: CreateFilmModel):
+    """Create a new film"""
     try:
         new_film = await films_service.create_film(film)
         if not new_film:
@@ -43,6 +46,7 @@ async def add_film(film: CreateFilmModel):
 
 @router.put("/films/{film_id}")
 async def update_single_film(film_id: str, film: UpdateFilmModel):
+    """Update a film by its ID"""
     try:
         updated_film = await films_service.update_film(film_id, film)
         if not updated_film:
@@ -54,6 +58,7 @@ async def update_single_film(film_id: str, film: UpdateFilmModel):
 
 @router.delete("/films/{film_id}")
 async def remove_film(film_id: str):
+    """Delete a film by its ID"""
     try:
         deleted_film = await films_service.delete_film(film_id)
         if not deleted_film:
@@ -65,6 +70,11 @@ async def remove_film(film_id: str):
 
 @router.get("/films/filter/", response_model=List[FilmModel])
 async def get_films_by_genre(genre: Optional[str] = Query(None)):
+    """
+     Get films by genre
+    :param genre:
+    :return: films by genre
+    """
     try:
         films = await films_service.get_films_by_genre(genre)
         if not films:
@@ -76,6 +86,12 @@ async def get_films_by_genre(genre: Optional[str] = Query(None)):
 
 @router.get("/films/sort/", response_model=List[FilmModel])
 async def get_sorted_films(field: Optional[str] = Query(None), order: Optional[str] = Query(None)):
+    """
+    Get sorted films
+    :param field:
+    :param order:
+    :return: sorted films
+    """
     try:
         films = await films_service.get_sorted_films(field, order)
         return films
@@ -85,6 +101,11 @@ async def get_sorted_films(field: Optional[str] = Query(None), order: Optional[s
 
 @router.get("/films/limit/", response_model=FilmsLimitResponse)
 async def get_limited_films(limit: Optional[int] = Query(None)):
+    """
+    Get limited films
+    :param limit:
+    :return: limited films
+    """
     try:
         films = await films_service.get_limited_films(limit)
         return films
