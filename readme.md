@@ -17,7 +17,7 @@ purposes.
 
 1. Clone the repository:
     ```
-    git clone https://github.com/yourusername/film-api.git
+    git clone https://github.com/JostinCabascango/film-api-mongodb.git
     ```
 2. Navigate to the project directory:
     ```
@@ -40,7 +40,7 @@ The application will be available at `http://localhost:8000`.
 
 ## Testing the API
 
-You can test the API using the provided `.http` file in a tool
+You can test the API using the provided `tests/test_main.http` file in a tool
 like [REST Client for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
 or [Postman](https://www.postman.com/).
 
